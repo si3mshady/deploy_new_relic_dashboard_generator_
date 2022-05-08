@@ -7,6 +7,12 @@ terraform {
   }
 }
 
+
+# Configure the AWS Provider
+provider "aws" {
+  region = var.aws_region
+}
+
 resource "null_resource" "create_deployment_package" {
   provisioner "local-exec" {
     command = <<HEREDOC
@@ -19,10 +25,18 @@ HEREDOC
   }
 }
 
-# Configure the AWS Provider
-provider "aws" {
-  region = var.aws_region
+
+
+resource "aws_lambda_function" "daily_nr_metrics" {
+
+  filename      = "deployment_package.zip"
+  function_name = "daily_nr_metrics"
+  role          = aws_iam_role.new_relic_iam_for_lambda.arn
+  handler       = "lambda_handler.lambda_handler"
+  runtime       = var.new_relic_python_rt[0]
 }
+
+
 
 resource "aws_iam_role" "new_relic_ca_access" {
   name               = "new_relic_ca_role"
@@ -77,13 +91,4 @@ resource "aws_iam_role" "new_relic_iam_for_lambda" {
   ]
 }
 EOF
-}
-
-resource "aws_lambda_function" "daily_nr_metrics" {
-
-  filename      = "deployment_package.zip"
-  function_name = "daily_nr_metrics"
-  role          = aws_iam_role.new_relic_iam_for_lambda.arn
-  handler       = "lambda_handler.lambda_handler"
-  runtime       = var.new_relic_python_rt[0]
 }
