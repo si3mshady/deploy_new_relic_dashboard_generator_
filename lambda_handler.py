@@ -1,6 +1,6 @@
 import boto3,requests, wget, subprocess
 import send_email from 'send_email.py'
-
+import shutil
 
 TMP = '/tmp'
 guid = "MzI1NzMxNnxWSVp8REFTSEJPQVJEfDQzMTQyMjE"
@@ -17,12 +17,21 @@ def post_request():
     return r.json().get('data').get('dashboardCreateSnapshotUrl')
 
 
-def download_dashboard(url):
+
+def download_digital_dashboard(url):
+    local_filename 'digital_dash.pdf'
+    with requests.get(url, stream=True) as r:
+        with open(TMP + '/' + local_filename, 'wb') as f:
+            shutil.copyfileobj(r.raw, f)
+
+    return local_filename
 
 
 
 def lambda_handler():
-    pass
+    url = post_request()
+    name = download_digital_dashboard(url)
+    
 
      # send_email(to,from, subject, filenam
 
@@ -31,8 +40,8 @@ def lambda_handler():
 #
 # curl https://api.newrelic.com/graphql \
 #   -H 'Content-Type: application/json' \
-#   -H 'API-Key: NRAK-Z0BW4QHNPVDOQ8FRBXLCW8KPMCW' \
-#   --data-binary '{"query":"mutation {\n  dashboardCreateSnapshotUrl(guid: \"MzI1NzMxNnxWSVp8REFTSEJPQVJEfDQzMTQyMjE\")\n}\n", "variables":""}'
+#   -H 'API-Key: NRAK-Z08888W8KPMCW' \
+#   --data-binary '{"query":"mutation {\n  dashboardCreateSnapshotUrl(guid: \"MzI18888SEJPQVJEfDQzMTQyMjE\")\n}\n", "variables":""}'
 # # https://api.newrelic.com/graphql
 #
 #
