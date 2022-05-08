@@ -21,7 +21,8 @@ resource "null_resource" "create_deployment_package" {
     pip install -r requirements.txt -t deployment/
     cp lambda_handler.py deployment/
     cp sendemail.py deployment/
-    touch __init__.py deployment/
+    touch __init__.py
+    cp __init__.py deployment/
     zip -r  deployment_package.zip deployment
 HEREDOC
   }
