@@ -3,11 +3,11 @@ from  sendemail import  send_email
 import shutil
 
 TMP = '/tmp'
-guid = "MzI1NzMxNnxWSVp8REFTSEJPQVJEfDQzMTQyMjE"
-api_key=  "NRAK-Z0BW4QHNPVDOQ8FRBXLCW8KPMCW"
+guid = "MzI1NzMxNnxWxxxEJPQVJEfDQzMTQyMjE"
+api_key=  "NRAK-Z0BW4QHxxxxNPVDOQ8FRBXLCW8KPMCW"
 
 query = {"query":"mutation {\n  dashboardCreateSnapshotUrl(guid:\
- \"MzI1NzMxNnxWSVp8REFTSEJPQVJEfDQzMTQyMjE\")\n}\n", "variables":""}
+ \"MzI1NzMxNnxxxxFTSEJPQVJEfDQzMTQyMjE\")\n}\n", "variables":""}
 
 graph_ql_endpoint = "https://api.newrelic.com/graphql"
 headers = { 'Content-Type': 'application/json', 'API-KEY': api_key}
